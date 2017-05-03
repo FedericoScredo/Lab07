@@ -8,12 +8,12 @@ public class TestModel {
 		
 		Model model = new Model();
 		
-		System.out.println(String.format("**Grafo creato** - Trovate #%d parole di lunghezza 4\n",  model.createGraph(4).size()));
+		System.out.println(String.format("**Grafo creato** - Trovate #%d parole di lunghezza 3\n",  model.createGraph(3).size()));
 		
-		List<String> vicini = model.displayNeighbours("casa");
-		System.out.println("Vicini di casa: " + vicini);
+		List<String> vicini = model.displayNeighbours("dai");
+		System.out.println("Vicini di dai: " + vicini);
 		
-		List<String> neighbours = model.displayAllNeighbours("casa");
+		List<String> neighbours = model.displayAllNeighbours("dai");
 		System.out.println(neighbours);
 		System.out.println(neighbours.size());
 	}

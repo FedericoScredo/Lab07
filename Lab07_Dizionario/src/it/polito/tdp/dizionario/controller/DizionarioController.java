@@ -1,8 +1,11 @@
 package it.polito.tdp.dizionario.controller;
 
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.dizionario.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +13,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class DizionarioController {
+	
+	Model model;
 
 	@FXML
 	private ResourceBundle resources;
@@ -27,17 +32,23 @@ public class DizionarioController {
 	private Button btnTrovaVicini;
 	@FXML
 	private Button btnTrovaTutti;
+	@FXML
+	private Button brnReset;
 
 	@FXML
 	void doReset(ActionEvent event) {
-		txtResult.setText("Reset!");
+		txtResult.setText("");
 	}
 
 	@FXML
 	void doGeneraGrafo(ActionEvent event) {
 
 		try {
-			txtResult.setText("Controller -- TODO!");
+			txtResult.clear();
+			txtResult.appendText(""+model.createGraph(Integer.parseInt(inputNumeroLettere.getText())).size()+"\n");
+			for(String s: model.createGraph(Integer.parseInt(inputNumeroLettere.getText()))){
+				txtResult.appendText(s+"\n");
+			}
 			
 		} catch (RuntimeException re) {
 			txtResult.setText(re.getMessage());
@@ -48,8 +59,11 @@ public class DizionarioController {
 	void doTrovaTutti(ActionEvent event) {
 		
 		try {
-			txtResult.setText("Controller -- TODO!");
-
+			txtResult.clear();
+			txtResult.appendText(""+model.displayAllNeighbours(inputParola.getText()).size()+"\n");
+			for(String s:model.displayAllNeighbours(inputParola.getText())){
+				txtResult.appendText(s+"\n");
+			}
 		} catch (RuntimeException re) {
 			txtResult.setText(re.getMessage());
 		}
@@ -59,12 +73,19 @@ public class DizionarioController {
 	void doTrovaVicini(ActionEvent event) {
 		
 		try {
-			txtResult.setText("Controller -- TODO!");
-
+			txtResult.clear();
+			txtResult.appendText(""+model.displayNeighbours(inputParola.getText()).size()+"\n");
+			for(String s: model.displayNeighbours(inputParola.getText())){
+				txtResult.appendText(s+"\n");
+			}
 		} catch (RuntimeException re) {
 			txtResult.setText(re.getMessage());
 		}
 	}
+	
+    public void setModel(Model model) {
+    	this.model=model;
+    }
 
 	@FXML
 	void initialize() {
